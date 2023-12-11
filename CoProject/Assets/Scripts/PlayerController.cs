@@ -22,14 +22,6 @@ public class PlayerController : NetworkBehaviour
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
-        transform.position += new Vector3(horizontalInput, 0, verticalInput) * Time.deltaTime * walkingSpeed;
-
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = Camera.main.transform.position.y;
-        Vector3 mouseInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
-        mouseInWorld = mouseInWorld - transform.position;
-        mouseInWorld.y = 0;
-        Debug.Log(mouseInWorld.x + ", " + mouseInWorld.y + ", " + mouseInWorld.z);
-        transform.forward = mouseInWorld;
+        transform.position += new Vector3(horizontalInput, verticalInput) * Time.deltaTime * walkingSpeed;
     }
 }
