@@ -17,34 +17,47 @@ public class Container : MonoBehaviour
     {
         if (width < 1 || height < 1) return false;
 
-        for(int i=0; i<slotsFilled.Length - height;i++)
+        int[] histogram = new int[slotsFilled.Length];
+
+        int j = 0;
+        while(j < slotsFilled.Length)
         {
-            for(int j=0; j<slotsFilled.GetLength(i) - width;j++)
+            for (int i = 0; i < slotsFilled.GetLength(j); i++)
             {
-                bool sectionIsClear = true;
+                histogram[i] = slotsFilled[j, i] == true ? histogram[i] + 1 : 0;
+            }
 
-                for(int y=0; y<height; y++)
+            for (int i = 0; i < slotsFilled.GetLength(j); i++)
+            {
+                if(histogram[i] >= height)
                 {
-                    for(int x=0;x<width;x++)
+                    for(int k = i; k < width; k++)
                     {
-                        if (slotsFilled[y, x] == true) sectionIsClear = false;
+                        if (histogram[k] < height || k >= slotsFilled.GetLength(0))
+                        {
+                            i = k;
+                        }
+
+                        else return true;
                     }
                 }
 
-                if (sectionIsClear) return true;
-                sectionIsClear = true;
-
-                for (int y = 0; y < height; y++)
+                if (histogram[i] >= width)
                 {
-                    for (int x = 0; x < width; x++)
+                    for (int k = i; k < height; k++)
                     {
-                        if (slotsFilled[x, y] == true) sectionIsClear = false;
+                        if (histogram[k] < width || k >= slotsFilled.GetLength(0))
+                        {
+                            i = k;
+                        }
+
+                        else return true;
                     }
                 }
-
-                if (sectionIsClear) return true;
             }
         }
+        
+
         return false;
     }
 
