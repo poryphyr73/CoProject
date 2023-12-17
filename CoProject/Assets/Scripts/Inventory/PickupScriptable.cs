@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+[CreateAssetMenu(fileName = "Item", menuName = "Items/Pickup", order = 1)]
 public class PickupScriptable : ScriptableObject
 {
-    [SerializeField] private int _stackSize { get; }
-    [SerializeField] private int _width { get; }
-    [SerializeField] private int _height { get; }
-    [SerializeField] string _name { get; }
+
+    public int _stackSize;
+    public int _width;
+    public int _height;
+    public string _name;
+    public Sprite img;
 }
