@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8512182706881314753}
   - component: {fileID: 8512182706881314752}
   - component: {fileID: 8512182706881314757}
+  - component: {fileID: 7765719811179884273}
   - component: {fileID: 8512182706881314754}
   m_Layer: 0
   m_Name: Player
@@ -83,6 +84,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cheapInterpolationTime: 0.1
+--- !u!114 &7765719811179884273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512182706881314782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f662ee1b3857e645a1882a487cd8197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedIndex: 0
+  genericDropPrefab: {fileID: 0}
+  button: 0
+  debugToAdd: {fileID: 11400000, guid: 114ae769ec3215c4e8b9384c5483d8cf, type: 2}
 --- !u!61 &8512182706881314754
 BoxCollider2D:
   m_ObjectHideFlags: 0
