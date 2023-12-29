@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Settings
+public static class InventorySettings
 {
     public const int hotbarLength = 9;
+    public const float scale = 1;
 }
 
 public class Inventory : MonoBehaviour
 {
-    public PickupStack[] hotbar = new PickupStack[Settings.hotbarLength];
+    public PickupStack[] hotbar = new PickupStack[InventorySettings.hotbarLength];
     public int selectedIndex;
     public GameObject genericDropPrefab;
     
@@ -41,8 +42,8 @@ public class Inventory : MonoBehaviour
     public void Scroll(bool forward)
     {
         selectedIndex += (_ = forward ? 1 : -1);
-        if(selectedIndex < 0) { selectedIndex = Settings.hotbarLength - 1; return; }
-        if (selectedIndex >= Settings.hotbarLength) { selectedIndex = 0; return; }
+        if(selectedIndex < 0) { selectedIndex = InventorySettings.hotbarLength - 1; return; }
+        if (selectedIndex >= InventorySettings.hotbarLength) { selectedIndex = 0; return; }
     }
 
     public void OnValidate()
