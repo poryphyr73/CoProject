@@ -11,8 +11,10 @@ public static class InventorySettings
 public class Inventory : MonoBehaviour
 {
     public PickupStack[] hotbar = new PickupStack[InventorySettings.hotbarLength];
+    public PlayerController owner;
     public int selectedIndex;
     public GameObject genericDropPrefab;
+    public UIManager display;
     
     public bool button;
     public bool button2;
@@ -44,6 +46,7 @@ public class Inventory : MonoBehaviour
         selectedIndex += (_ = forward ? 1 : -1);
         if(selectedIndex < 0) { selectedIndex = InventorySettings.hotbarLength - 1; return; }
         if (selectedIndex >= InventorySettings.hotbarLength) { selectedIndex = 0; return; }
+        display.SetSelected(selectedIndex);
     }
 
     public void OnValidate()
