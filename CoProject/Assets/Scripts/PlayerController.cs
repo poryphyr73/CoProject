@@ -6,9 +6,11 @@ using Unity.Netcode;
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private float walkingSpeed = 5f;
+    private Inventory playerInventory;
 
-    private void Awake()
+    private void Start()
     {
+        playerInventory = GetComponent<Inventory>();
     }
 
     public override void OnNetworkSpawn()
@@ -22,6 +24,9 @@ public class PlayerController : NetworkBehaviour
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
-        transform.position += new Vector3(horizontalInput, verticalInput) * Time.deltaTime * walkingSpeed;
+        var mouseMovement = Input.GetAxis("Mouse ScrollWheel");
+
+        if(mouseMovement != 0) playerInventory.Scroll(mouseMovement);
+        transform.position += new Vector3(horizontalInput, verticalInput).normalized * Time.deltaTime * walkingSpeed;
     }
 }

@@ -9,20 +9,19 @@ public class UIManager : MonoBehaviour
 {
     public GameObject InventoryTile;
     public RectTransform InventoryRoot;
-    public PlayerNetwork LocalPlayer;
     public GameObject[] InventoryTiles;
 
     public void Start()
     {
-        
         InventoryTiles = new GameObject[InventorySettings.hotbarLength];
-        var offset = (InventorySettings.hotbarLength - 1) * InventorySettings.scale * -80;
+        var offset = (InventorySettings.hotbarLength - 1) * InventorySettings.scale * -60;
         for (int i = 0; i < InventorySettings.hotbarLength; i++)
         {
             InventoryTiles[i] = Instantiate(InventoryTile, InventoryRoot.transform);
-            InventoryTiles[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(i * 160 + offset, 0);
+            InventoryTiles[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(i * 120 + offset, 0);
             foreach (Transform child in InventoryTiles[i].transform) child.gameObject.SetActive(false);
         }
+        SetSelected(0);
     }
 
     public void SetSprite(PickupStack _toDisplay, int _index)

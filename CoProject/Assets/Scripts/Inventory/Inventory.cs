@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
 {
     public PickupStack[] hotbar = new PickupStack[InventorySettings.hotbarLength];
     public PlayerController owner;
-    public int selectedIndex;
+    public int selectedIndex = 0;
     public GameObject genericDropPrefab;
     public UIManager display;
     
@@ -20,6 +20,10 @@ public class Inventory : MonoBehaviour
     public bool button2;
     public Pickup temp;
 
+    private void Start()
+    {
+        display = GameObject.FindGameObjectWithTag("UI Manager").GetComponent<UIManager>();
+    }
     public void Add(Pickup _pickup)
     {
         PickupData _data = _pickup.data;
@@ -41,12 +45,14 @@ public class Inventory : MonoBehaviour
         hotbar[selectedIndex] = null;
     }
 
-    public void Scroll(bool forward)
+    public void Scroll(float mouseInput)
     {
-        selectedIndex += (_ = forward ? 1 : -1);
-        if(selectedIndex < 0) { selectedIndex = InventorySettings.hotbarLength - 1; return; }
-        if (selectedIndex >= InventorySettings.hotbarLength) { selectedIndex = 0; return; }
+        selectedIndex += (mouseInput < 0 ? 1 : -1);
+        if(selectedIndex < 0) selectedIndex = InventorySettings.hotbarLength - 1;
+        else if (selectedIndex >= InventorySettings.hotbarLength) selectedIndex = 0;
         display.SetSelected(selectedIndex);
+        Debug.Log("Scrolled " + (mouseInput > 0 ? 1 : -1) + "("+mouseInput+")");
+        Debug.Log(selectedIndex);
     }
 
     public void OnValidate()
